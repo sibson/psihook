@@ -10,7 +10,8 @@
     ],
 
      "formation": [
-        { "process": "web",    "quantity": 1}
+        { "process": "web",    "quantity": 1},
+        { "process": "worker", "quantity": 1}
     ],
     "env": {
         "DJANGO_SECRET_KEY": {

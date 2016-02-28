@@ -152,3 +152,13 @@ CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_HTTPONLY = True
 
 X_FRAME_OPTIONS = 'DENY'
+
+
+# Celery
+BROKER_URL = os.environ.get('CELERY_BROKER_URL', os.environ.get('REDIS_URL'))
+BROKER_TRANSPORT_OPTIONS = {
+    'visibility_timeout': 60 * 60,
+    'fanout_prefix': True,
+    'fanout_patterns': True,
+}
+CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_URL', BROKER_URL)

@@ -1,3 +1,4 @@
+celery[redis]
 Django
 dj-database-url
 gunicorn
