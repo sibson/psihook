@@ -1,0 +1,21 @@
+{
+    "name": "PsiHook",
+    "description": "Framework for stringing webhooks together",
+    "repository": "https://github.com/sibson/psihook",
+    "keywords": ["python", "django", "webhook"],
+    "addons": [
+        "heroku-postgresql",
+        "heroku-redis",
+        "newrelic"
+    ],
+
+     "formation": [
+        { "process": "web",    "quantity": 1}
+    ],
+    "env": {
+        "DJANGO_SECRET_KEY": {
+            "description": "Django Secret Key",
+            "generator": "secret"
+        }
+    }
+}
