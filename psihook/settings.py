@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 import dj_database_url
+import structlog
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'psihook_debug',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -143,7 +145,7 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 
 SECURE_BROWSER_XSS_FILTER = True
 
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = not DEBUG
 
 SESSION_COOKIE_SECURE = True
 
@@ -162,3 +164,31 @@ BROKER_TRANSPORT_OPTIONS = {
     'fanout_patterns': True,
 }
 CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_URL', BROKER_URL)
+
+# Logging
+structlog.configure(
+    processors=[
+        structlog.processors.KeyValueRenderer(
+            key_order=['event', 'request_id', 'method', 'path'],
+        ),
+    ],
+    cache_logger_on_first_use=True,
+    context_class=structlog.threadlocal.wrap_dict(dict),
+    logger_factory=structlog.stdlib.LoggerFactory()
+)
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        '': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+        },
+    },
+}

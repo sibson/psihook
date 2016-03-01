@@ -2,5 +2,7 @@ celery[redis]
 Django
 dj-database-url
 gunicorn
+psihook-plugin-debug
 psycopg2
+structlog
 whitenoise
