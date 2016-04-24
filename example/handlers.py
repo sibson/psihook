@@ -1,9 +1,12 @@
 from django.dispatch import receiver
 
+import structlog
+
 from psihook_debug.signals import psihook_debug
-from psihook_debug.tasks import log_signal
+
+log = structlog.get_logger()
 
 
 @receiver(psihook_debug)
 def handle_debug(sender, **kwargs):
-    log_signal.delay(kwargs['method'], kwargs['path'], kwargs['headers'], kwargs['payload'])
+    log.debug('debug hook called', **kwargs)
