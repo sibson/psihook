@@ -6,7 +6,7 @@ celery==3.1.20
 dj-database-url==0.4.0
 gunicorn==19.4.5
 kombu==3.0.33
--e git+git@github.com:sibson/psihook-plugin-debug.git@0c51deedb4e46298e762aa5be4ba0330109a5d6b#egg=psihook_plugin_debug-master
+-e git+git@github.com:sibson/psihook-plugin-debug.git#egg=psihook_plugin_debug-master
 psycopg2==2.6.1
 pytz==2015.7
 redis==2.10.5
