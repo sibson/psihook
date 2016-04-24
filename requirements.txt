@@ -7,6 +7,7 @@ dj-database-url==0.4.0
 gunicorn==19.4.5
 kombu==3.0.33
 git+https://github.com/sibson/psihook-plugin-debug#egg=psihook_plugin_debug-master
+git+https://github.com/sibson/psihook-core#egg=psihook_core
 psycopg2==2.6.1
 pytz==2015.7
 redis==2.10.5
